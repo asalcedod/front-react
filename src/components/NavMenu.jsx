@@ -44,18 +44,8 @@ const NavMenu = () => {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-light" to="/DBView">
-                  Database
-                </NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink tag={Link} className="text-light" to="/User">
                   User
-                </NavLink>
-              </NavItem>
-              <NavItem>
-              <NavLink tag={Link} className="text-light" to="/Permissions">
-                  Permissions
                 </NavLink>
               </NavItem>
               <NavItem>

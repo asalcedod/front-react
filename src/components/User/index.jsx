@@ -24,10 +24,11 @@ const User = (props) => {
 
   const peticionGet = async () => {
     await axios
-      .get(baseUrl + 'users/' + cookies.get('form').id)
+      .get(baseUrl + 'user/' + cookies.get('form')._id)
       .then((response) => {
-        cookies.set('form', response.data, { path: '/' })
-        setUser(response.data)
+        console.log(response.data.data)
+        cookies.set('form', response.data.data, { path: '/' })
+        setUser(response.data.data)
         setChangePass(false)
       })
       .catch((error) => {
@@ -48,12 +49,12 @@ const User = (props) => {
 
   const createUser = async () => {
     await axios
-      .post(baseUrl + 'users', {
+      .post(baseUrl + 'user', {
         identification: user.identification,
         email: user.email,
         password: changePass ? user.password : md5("123456789"),
         customerID: user.customerID,
-        rolID: user.rolID,
+        rol: user.rol,
         status: user.status
       })
       .then((response) => {
@@ -68,7 +69,7 @@ const User = (props) => {
 
   const updateUser = async () => {
     await axios
-      .put(baseUrl + 'users/' + user.id, user)
+      .put(baseUrl + 'user/' + user.id, user)
       .then((response) => {
         cookies.set('form', response.data, { path: '/' })
         setUser(response.data)
@@ -86,23 +87,8 @@ const User = (props) => {
         let option = [<option value="DEFAULT" disabled>{`Choose a option...`}</option>]
         setRol({
           ...rol,
-          rolID: option.concat(response.data.map((val) => {
-            return (<option value={val.id}>{val.name}</option>)
-          }))
-        })
-      }).catch(error => {
-        console.log(error)
-      })
-  }
-
-  const renderCustomer = async () => {
-    return await axios.get(baseUrl + "customers")
-      .then(response => {
-        let option = [<option value="DEFAULT" disabled>{`Choose a option...`}</option>]
-        setCustomer({
-          ...customer,
-          customerID: option.concat(response.data.map((val) => {
-            return (<option value={val.id}>{val.name}</option>)
+          rol: option.concat(response.data.data.map((val) => {
+            return (<option value={val._id}>{val.name}</option>)
           }))
         })
       }).catch(error => {
@@ -133,7 +119,6 @@ const User = (props) => {
       if (firstRender) {
         setFirstRender(false)
         peticionGet()
-        renderCustomer()
         renderRol()
       }
     }
@@ -141,6 +126,7 @@ const User = (props) => {
   return (
     <div className="Container">
       <NavMenu />
+      {console.log(cookies.get('form'))}
       <div id="formUser">
         <div className="row pt-5">
           <div className="col-sm-12">
@@ -179,36 +165,20 @@ const User = (props) => {
               id="email"
             />
           </div>
-          {cookies.get('form').rolID == 1 ? 
+          {cookies.get('form').rol.name === "Root" ? 
           <div className="col-sm-6">
             <label for="sel1">Rol:</label>
             <select
               defaultValue="DEFAULT"
               className="form-control"
-              name="rolID"
+              name="rol"
               onChange={handleChange}
-              value={user ? user.rolID : ''}
-              id="rolID"
+              value={user ? user.rol : ''}
+              id="rol"
             >
-              {rol["rolID"] ? rol["rolID"] : null}
+              {rol["rol"] ? rol["rol"] : null}
             </select>
           </div> : null}
-          
-        </div>
-        <div className="row">
-          <div className="col-sm-6">
-            <label for="sel1">Customer:</label>
-            <select
-              className="form-control"
-              defaultValue="DEFAULT"
-              name="customer"
-              onChange={handleChange}
-              value={user ? user.customerID : ''}
-              id="customerID"
-            >
-              {customer["customerID"] ? customer["customerID"] : null}
-            </select>
-          </div>
           <div className="col-sm-6">
             <label for="sel1">Status:</label>
             <select
@@ -226,7 +196,7 @@ const User = (props) => {
           </div>
         </div>
         <div className="row">
-          {cookies.get('form').rolID == 1 ?
+          {cookies.get('form').rol.name === "Root" ?
             <div className="col-sm-4 button-style">
               <button id="createUser" onClick={createUser} className="btn btn-success submit-button">
                 <FontAwesomeIcon icon={faPlus} />
@@ -242,11 +212,11 @@ const User = (props) => {
           </div>
         </div>
       </div>
-      {cookies.get('form').rolID == 1 ?
+      {cookies.get('form').rol.name === "Root" ?
         <div>
           <h5>Users List</h5>
           {data ? <Table title={UserModel} data={data.filter(function (value, index, arr) {
-            return value.id != cookies.get('form').id
+            return value.id != cookies.get('form')._id
           })} baseUrl={baseUrl + "users"} /> : <ProgressBar color="black" colorBar="grey"></ProgressBar>}
         </div>
         : null}

@@ -22,17 +22,6 @@ export const SubmitModel = [{
 
 },
 {
-    id: 'customerID',
-    name: 'Customer',
-    type: 'select',
-    foreign: {
-        controller: 'customers',
-        key: 'id'
-    },
-    form: true,
-    grid: false
-},
-{
     id: 'status',
     name: 'Status',
     type: 'select',
@@ -52,12 +41,4 @@ export const SubmitModel = [{
     type: 'text',
     form: false,
     grid: true
-}, {
-    id: 'childrens',
-    name: 'Childrens',
-    children: {
-        customerID: null,
-    },
-    form: false,
-    grid: false
 }]

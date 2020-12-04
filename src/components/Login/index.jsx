@@ -24,11 +24,9 @@ const Login = (props) => {
     const [hasError, setHasError] = useState(false);
 
     const login = async () => {
-        await axios.get(baseUrl + `users/${form.identification}/${form.password}`)
+        await axios.get(baseUrl + `login/${form.identification}/${form.password}`)
             .then(response => {
-                return response.data
-            }).then(response => {
-                ifMatch(response)
+                ifMatch(response.data.data)
             }).catch(err => {
                 setHasError(true);
                 alert(err)
@@ -80,6 +78,8 @@ const Login = (props) => {
 
     const ifMatch = (param) => {
         if (param.identification === form.identification && param.password === form.password) {
+            console.log(param)
+            debugger
             cookies.set('form', param, { path: '/' })
             // setIsLogin(true);
             props.history.push('/Submit');

@@ -24,23 +24,12 @@ export const UserModel = [
 
     },
     {
-        id: 'customerID',
-        name: 'Customer',
-        type: 'select',
-        foreign: {
-            controller: 'customers',
-            key: 'id'
-        },
-        form: true,
-        grid: false
-    },
-    {
-        id: 'rolID',
+        id: 'rol',
         name: 'Rol',
         type: 'select',
         foreign: {
             controller: 'rols',
-            key: 'id'
+            key: '_id'
         },
         form: true,
         grid: false
@@ -69,7 +58,6 @@ export const UserModel = [
         id: 'childrens',
         name: 'Childrens',
         children: {
-            customerID: null,
             rolID: null
         },
         form: false,
