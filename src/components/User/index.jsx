@@ -19,7 +19,6 @@ const User = (props) => {
   const [data, setData] = useState(null)
   const [user, setUser] = useState(usr)
   const [changePass, setChangePass] = useState(false)
-  const [customer, setCustomer] = useState({});
   const [rol, setRol] = useState({});
 
   const peticionGet = async () => {
@@ -40,7 +39,7 @@ const User = (props) => {
     await axios
       .get(baseUrl + 'users')
       .then((response) => {
-        setData(response.data)
+        setData(response.data.data)
       })
       .catch((error) => {
         console.log(error)

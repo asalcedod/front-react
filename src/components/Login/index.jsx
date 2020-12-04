@@ -78,8 +78,6 @@ const Login = (props) => {
 
     const ifMatch = (param) => {
         if (param.identification === form.identification && param.password === form.password) {
-            console.log(param)
-            debugger
             cookies.set('form', param, { path: '/' })
             // setIsLogin(true);
             props.history.push('/Submit');
@@ -107,7 +105,7 @@ const Login = (props) => {
     return (
         <div className='login-container'>
             <div className='login-content'>
-                <Logo />
+                {/*<Logo />*/}
                 {hasError &&
                     <lable className='label-alert'>
                         Your password or username are incorrect or do not exist.
