@@ -28,8 +28,8 @@ export const UserModel = [
         name: 'Rol',
         type: 'select',
         foreign: {
-            controller: 'rols',
-            key: '_id'
+            controller: 'rol',
+            key: 'id'
         },
         form: true,
         grid: false

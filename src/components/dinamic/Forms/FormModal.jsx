@@ -41,7 +41,7 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
             console.log(error)
           })
       case "put":
-        return await axios.put(controller + "/" + form.id, form)
+        return await axios.put(controller + "/" + form._id, form)
           .then(() => {
             setLoading(true)
             setShow(!show)

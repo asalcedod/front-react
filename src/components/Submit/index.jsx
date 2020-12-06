@@ -76,14 +76,14 @@ const Submit = (props) => {
   }
 
   return (
-    <Container>
+    <div className="Container">
       <NavMenu />
       <Container>
         <h5>Submit List</h5>
         <div>{renderActionButtons(SubmitModel, ['create'])}</div>
         {data ? <Table title={SubmitModel} data={data} baseUrl={baseUrl + "submit"} /> : <ProgressBar color="black" colorBar="grey"></ProgressBar>}
       </Container>
-    </Container>
+    </div>
   )
 }
 
