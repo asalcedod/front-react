@@ -11,7 +11,7 @@ import './table.css'
 const CRUD = ({ title, data, baseUrl }) => {
 
   const peticionDelete = async (data) => {
-    await axios.delete(baseUrl + "/" + data.id)
+    await axios.delete(baseUrl + "/" + data._id)
       .then(response => {
 
       }).catch(error => {
@@ -48,9 +48,9 @@ const CRUD = ({ title, data, baseUrl }) => {
               </td>
             )
           } if (key.id === 'status') {
-            if (data[key.id] === '1') {
+            if (data[key.id] === 1) {
               return <td key={`${data[key.id]}-${key.id}`}>Active</td>
-            } if (data[key.id] === '0') {
+            } if (data[key.id] === 0) {
               return <td key={`${data[key.id]}-${key.id}`}>Inactive</td>
             } else {
               return <td key={`${data[key.id]}-${key.id}`}>N/A</td>

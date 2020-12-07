@@ -5,7 +5,7 @@ import {
   Label,
   Input,
 } from 'reactstrap'
-import { Status } from './../Status'
+import { Status } from '../Status'
 import PropTypes from 'prop-types'
 
 const FormURS = ({ inputs, data }) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { baseUrl } from './../constants/url'
+import { Button } from 'reactstrap'
 import md5 from 'md5';
 import PasswordModal from './PasswordModal'
 import Logo from './Logo/Logo';
@@ -146,9 +147,9 @@ const Login = (props) => {
                 }
 
                 <div className='submit-button-container'>
-                    <button onClick={() => login()} className='submit'>
+                    <Button onClick={() => login()} className='submit'>
                         Login
-                    </button>
+                    </Button>
                 </div>
                 {email.email ? <PasswordModal userLogin={email} /> : null}
             </div>

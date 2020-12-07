@@ -26,7 +26,6 @@ const User = (props) => {
     await axios
       .get(baseUrl + "user/" + cookies.get("form")._id)
       .then((response) => {
-        console.log(response.data.data);
         cookies.set("form", response.data.data, { path: "/" });
         setUser(response.data.data);
         setChangePass(false);
@@ -51,6 +50,7 @@ const User = (props) => {
     await axios
       .post(baseUrl + "user", {
         identification: user.identification,
+        name: user.name,
         email: user.email,
         password: changePass ? user.password : md5("123456789"),
         rol: user.rol,
@@ -131,7 +131,6 @@ const User = (props) => {
   return (
     <div className="Container">
       <NavMenu />
-      {console.log(cookies.get("form"))}
       <div id="formUser">
         <div className="row pt-5">
           <div className="col-sm-12">
@@ -155,6 +154,19 @@ const User = (props) => {
               name="password"
               onChange={handleChange}
               id="password"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <label for="name">Name:</label>
+            <input
+              type="name"
+              className="form-control"
+              name="name"
+              value={user ? user.name : ""}
+              onChange={handleChange}
+              id="name"
             />
           </div>
         </div>
@@ -196,8 +208,8 @@ const User = (props) => {
               id="status"
             >
               <option value="DEFAULT" disabled>{`Choose a option...`}</option>
-              <option value={"1"}>Active</option>
-              <option value={"0"}>Inactive</option>
+              <option value={1}>Active</option>
+              <option value={0}>Inactive</option>
             </select>
           </div>
         </div>
@@ -234,9 +246,9 @@ const User = (props) => {
               <Table
                 title={UserModel}
                 data={data.filter(function (value, index, arr) {
-                  return value.id != cookies.get("form")._id;
+                  return value._id !== cookies.get("form")._id;
                 })}
-                baseUrl={baseUrl + "users"}
+                baseUrl={baseUrl + "user"}
               />
             ) : (
               <ProgressBar color="black" colorBar="grey"></ProgressBar>

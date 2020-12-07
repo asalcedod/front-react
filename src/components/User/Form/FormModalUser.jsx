@@ -23,7 +23,6 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
   const [show, setShow] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [form, setForm] = useState(dataList);
-  const [customer, setCustomer] = useState({});
   const [rol, setRol] = useState({});
 
   const toggle = () => setShow(!show)
@@ -87,8 +86,7 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
           >
               <option value="DEFAULT" disabled>{`Choose a option...`}</option>
               {value.id === 'status' ?  renderStatus() : null}
-              {value.id === 'customerID' ?  customer[value.id] : null}
-              {value.id === 'rolID' ?  rol[value.id] : null}
+              {value.id === 'rol' ?  rol[value.id] : null}
             </Input>}
         </FormGroup>
       )
@@ -100,32 +98,11 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
     inputs.map((value) => {
       if (value.type === "select") {
         if (value.id !== "status") {
-          renderCustomers(value)
           renderRols(value)
         }
       }
     })
   }, [])
-
-  const renderCustomers = async (value) => {
-    return await axios.get(baseUrl + 'customers')
-      .then(response => {
-        setLoading(true)
-        // if (value.id === 'customerID') {
-        setCustomer({
-          ...customer,
-          customerID: response.data.map((val) => {
-            return <option value={val.id}>{val.name}</option>
-          })
-        })
-
-        // }
-        setLoading(false)
-      }).catch(error => {
-        setLoading(false)
-        console.log(error)
-      })
-  }
 
   const renderRols = async (value) => {
     return await axios.get(baseUrl + 'rols')
