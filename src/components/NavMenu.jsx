@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Collapse,
   Container,
@@ -7,30 +7,29 @@ import {
   NavbarToggler,
   NavItem,
   NavLink,
-} from 'reactstrap'
-import { Link } from 'react-router-dom'
-import './NavMenu.css'
-import Cookies from 'universal-cookie';
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import "./NavMenu.css";
+import Cookies from "universal-cookie";
 
 const NavMenu = () => {
-
-  const cookies = new Cookies()
-  const [collapsed, setCollapsed] = useState(true)
+  const cookies = new Cookies();
+  const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => {
-    setCollapsed(!collapsed)
-  }
+    setCollapsed(!collapsed);
+  };
 
   const logout = () => {
-    cookies.remove('form', { path: '/' })
-  }
+    cookies.remove("form", { path: "/" });
+  };
 
   return (
     <header>
       <Navbar className="navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
         <Container>
           <NavbarBrand tag={Link} className="text-light" to="#">
-            URS Submit
-            </NavbarBrand>
+            Submit Service
+          </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse
             className="d-sm-inline-flex flex-sm-row-reverse"
@@ -49,7 +48,12 @@ const NavMenu = () => {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-light" to="/" onClick={() => logout()}>
+                <NavLink
+                  tag={Link}
+                  className="text-light"
+                  to="/"
+                  onClick={() => logout()}
+                >
                   Logout
                 </NavLink>
               </NavItem>
@@ -58,7 +62,7 @@ const NavMenu = () => {
         </Container>
       </Navbar>
     </header>
-  )
-}
+  );
+};
 
-export default NavMenu
+export default NavMenu;
