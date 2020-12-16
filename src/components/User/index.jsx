@@ -53,6 +53,7 @@ const User = (props) => {
         name: user.name,
         email: user.email,
         password: changePass ? user.password : md5("123456789"),
+        path: user.path,
         rol: user.rol,
         status: user.status,
       })
@@ -68,10 +69,10 @@ const User = (props) => {
 
   const updateUser = async () => {
     await axios
-      .put(baseUrl + "user/" + user.id, user)
+      .put(baseUrl + "user/" + user._id, user)
       .then((response) => {
-        cookies.set("form", response.data, { path: "/" });
-        setUser(response.data);
+        cookies.set("form", user, { path: "/" });
+        setUser(user);
         peticionGet();
         getUsers();
       })
@@ -178,6 +179,19 @@ const User = (props) => {
               value={user ? user.name : ""}
               onChange={handleChange}
               id="name"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <label for="path">Profile Picture:</label>
+            <input
+              type="file"
+              className="form-control"
+              name="path"
+              value={""}
+              onChange={handleChange}
+              id="path"
             />
           </div>
         </div>

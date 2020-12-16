@@ -32,6 +32,14 @@ export const UserModel = [
 
     },
     {
+        id: 'path',
+        name: 'Image Profile',
+        type: 'file',
+        form: true,
+        grid: false
+
+    },
+    {
         id: 'rol',
         name: 'Rol',
         type: 'select',
