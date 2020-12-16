@@ -8,6 +8,14 @@ export const UserModel = [
 
     },
     {
+        id: 'username',
+        name: 'Username',
+        type: 'text',
+        form: true,
+        grid: true
+
+    },
+    {
         id: 'email',
         name: 'Email',
         type: 'email',

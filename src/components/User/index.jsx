@@ -134,7 +134,7 @@ const User = (props) => {
       <div id="formUser">
         <div className="row pt-5">
           <div className="col-sm-12">
-            <label for="usr">User:</label>
+            <label for="identification">Identification:</label>
             <input
               type="text"
               className="form-control"
@@ -142,6 +142,17 @@ const User = (props) => {
               onChange={handleChange}
               value={user ? user.identification : ""}
               id="identification"
+            />
+          </div>
+          <div className="col-sm-12">
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="id"
+              onChange={handleChange}
+              value={user ? user.username : ""}
+              id="username"
             />
           </div>
         </div>
@@ -171,8 +182,8 @@ const User = (props) => {
           </div>
         </div>
         <div className="row">
-          <div name="que" className="col-sm-4">
-            <label for="user">Email:</label>
+          <div className="col-sm-4">
+            <label for="email">Email:</label>
             <input
               type="email"
               className="form-control"
@@ -251,8 +262,8 @@ const User = (props) => {
                 baseUrl={baseUrl + "user"}
               />
             ) : (
-              <ProgressBar color="black" colorBar="grey"></ProgressBar>
-            )}
+                <ProgressBar color="black" colorBar="grey"></ProgressBar>
+              )}
           </Container>
         </div>
       ) : null}

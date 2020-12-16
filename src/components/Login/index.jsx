@@ -3,6 +3,7 @@ import { baseUrl } from './../constants/url'
 import { Button } from 'reactstrap'
 import md5 from 'md5';
 import PasswordModal from './PasswordModal'
+import RegisterModal from './RegisterModal'
 import Logo from './Logo/Logo';
 import Label from './Label/Label';
 import Input from './Input/Input'
@@ -16,16 +17,16 @@ import './../../styles/react-confirm-alert.css';
 const Login = (props) => {
     const cookies = new Cookies()
     const [form, setForm] = useState({
-        identification: '',
+        username: '',
         password: ''
     });
-    const [identificationError, setIdentificationError] = useState(false)
+    const [usernameError, setUsernameError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [email, setEmail] = useState('');
     const [hasError, setHasError] = useState(false);
 
     const login = async () => {
-        await axios.get(baseUrl + `login/${form.identification}/${form.password}`)
+        await axios.get(baseUrl + `login/${form.username}/${form.password}`)
             .then(response => {
                 ifMatch(response.data.data)
             }).catch(err => {
@@ -43,7 +44,7 @@ const Login = (props) => {
     const handleChange = e => {
         const { name, value } = e.target
         setPasswordError(false)
-        setIdentificationError(false)
+        setUsernameError(false)
         if (name === "password") {
             if (value.length < 6) {
                 setPasswordError(true);
@@ -61,14 +62,14 @@ const Login = (props) => {
             }
         } else {
             if (value.length < 2) {
-                setIdentificationError(true);
+                setUsernameError(true);
                 setForm({
                     ...form,
                     [name]: null
                 })
             }
             else {
-                setIdentificationError(false);
+                setUsernameError(false);
                 setForm({
                     ...form,
                     [name]: value
@@ -78,7 +79,7 @@ const Login = (props) => {
     };
 
     const ifMatch = (param) => {
-        if (param.identification === form.identification && param.password === form.password) {
+        if (param.username === form.username && param.password === form.password) {
             cookies.set('form', param, { path: '/' })
             // setIsLogin(true);
             props.history.push('/Submit');
@@ -89,7 +90,7 @@ const Login = (props) => {
             setHasError(true)
             confirmAlert({
                 title: 'Password or username incorrect',
-                message: 'Do you want to try with another user?',
+                message: 'Do you want to try with another username?',
                 buttons: [
                     {
                         label: 'Yes',
@@ -112,18 +113,18 @@ const Login = (props) => {
                         Your password or username are incorrect or do not exist.
                     </lable>
                 }
-                <Label text='User' />
+                <Label text='Username' />
                 <div>
-                    <i className="fa fa-user form-control-feedback"></i>
+                    <i className="fa fa-username form-control-feedback"></i>
                     <Input
                         attribute={{
-                            id: 'identification',
-                            name: 'identification',
+                            id: 'username',
+                            name: 'username',
                             type: 'text',
-                            placeholder: 'Enter your user'
+                            placeholder: 'Enter your username'
                         }}
                         handleChange={handleChange}
-                        param={identificationError}
+                        param={usernameError}
                     />
                 </div>
                 <Label text='Password' />
@@ -151,6 +152,7 @@ const Login = (props) => {
                         Login
                     </Button>
                 </div>
+                <RegisterModal />
                 {email.email ? <PasswordModal userLogin={email} /> : null}
             </div>
         </div>

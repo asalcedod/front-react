@@ -111,7 +111,7 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
         // if (value.id === 'customerID') {
         setRol({
           ...rol,
-          rolID: response.data.map((val) => {
+          rolID: response.data.data.map((val) => {
             return <option value={val.id}>{val.name}</option>
           })
         })

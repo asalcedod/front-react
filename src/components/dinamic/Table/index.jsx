@@ -54,7 +54,6 @@ const CRUD = ({ title, data, baseUrl }) => {
             );
           }
           if (key.id === "status") {
-            console.log(data);
             if (data[key.id] == 1) {
               return <td key={`${data[key.id]}-${key.id}`}>Active</td>;
             }
