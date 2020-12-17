@@ -27,7 +27,7 @@ const NavMenu = () => {
     <header>
       <Navbar className="navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
         <Container>
-          <NavbarBrand tag={Link} className="text-light" to="#">
+          <NavbarBrand tag={Link} className="text-light" to="/">
             Submit Service
           </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
