@@ -36,16 +36,29 @@
 }
 
 .submit {
-    width: 100%;
+    width: 90%;
     height: 35px;
     border-radius: 16px;
     border: none;
     padding: 0 10px 0 2px;
     box-sizing: border-box;
+    text-align: center;
     margin-bottom: 18px;
     justify-content: center;
-    background: #36c;
+    background: #03ad50;
     color: white;     
+}
+
+.register {
+  width: 80%;
+  height: 35px;
+  border-radius: 16px;
+  border: none;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+  justify-content: center;
+  background: #36c;
+  color: white;     
 }
 
 .container-fluid {
