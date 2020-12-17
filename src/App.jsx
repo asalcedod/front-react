@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router'
 import { Layout } from './components/Layout'
-import Customers from './components/Customers'
+import Products from './components/Products'
 import Login from './components/Login'
 import Submit from './components/Submit'
 import User from './components/User'
@@ -13,10 +13,10 @@ const App = () => {
   return (
     <div>
       <Route exact path="/" component={Login} />
-      <Route exact path="/Submit" component={Submit} />
-      <Route path="/Customers" component={Customers} />
-      <Route exact path="/User" component={User} />
-      <Route exact path="/Permissions" component={Permissions} />
+      <Route path="/Submit" component={Submit} />
+      <Route path="/Products" component={Products} />
+      <Route path="/User" component={User} />
+      <Route path="/Permissions" component={Permissions} />
     </div>
   )
 }

@@ -50,6 +50,7 @@ const User = (props) => {
     await axios
       .post(baseUrl + "user", {
         identification: user.identification,
+        username: user.username,
         name: user.name,
         email: user.email,
         password: changePass ? user.password : md5("123456789"),
@@ -189,7 +190,6 @@ const User = (props) => {
               type="file"
               className="form-control"
               name="path"
-              value={""}
               onChange={handleChange}
               id="path"
             />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { baseUrl } from './../../constants/url'
-import { Status } from './../Status'
+import { baseUrl } from '../../constants/url'
+import { Status } from '../../dinamic/Status'
 import LoadingOverlay from 'react-loading-overlay';
 import {
   Button,
@@ -19,11 +19,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
-const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, inputs, dataList }) => {
+const FormModalProduct = ({ modalTitle, colorButton, icon, controller, petitionType, inputs, dataList }) => {
   const [show, setShow] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [form, setForm] = useState(dataList);
-  const [children, setChildren] = useState(inputs[inputs.length - 1].children ? inputs[inputs.length - 1].children : null);
+  const [product, setProduct] = useState({});
 
   const toggle = () => setShow(!show)
 
@@ -41,7 +41,7 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
             console.log(error)
           })
       case "put":
-        return await axios.put(controller + "/" + form._id, form)
+        return await axios.put(controller + "/" + form.id, form)
           .then(() => {
             setLoading(true)
             setShow(!show)
@@ -66,14 +66,17 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
       return (
         <FormGroup key={`${value.id}-${value.name}`}>
           <Label for={value.id}>{value.name}</Label>
-          {value.type !== 'select' ? <Input
+          {value.type !== 'select' ? 
+          <Input
             key={value.id}
             onChange={handleChange}
             type={value.type}
             name={value.name}
             id={value.id}
             value={form[value.id] ? form[value.id] : ''}
-          /> : <Input
+          /> 
+          :
+          <Input
             onChange={handleChange}
             defaultValue={form[value.id] ? form[value.id] : "DEFAULT"}
             key={value.id}
@@ -82,7 +85,8 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
             id={value.id}
           >
               <option value="DEFAULT" disabled>{`Choose a option...`}</option>
-              {value.id !== 'status' ? children[value.id] : renderStatus()}
+              {value.id === 'status' ?  renderStatus() : null}
+              {value.id === 'rol' ?  product[value.id] : null}
             </Input>}
         </FormGroup>
       )
@@ -94,21 +98,20 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
     inputs.map((value) => {
       if (value.type === "select") {
         if (value.id !== "status") {
-          renderSelect(value)
+          renderProducts(value)
         }
       }
     })
   }, [])
 
-  const renderSelect = async (value) => {
-    const { id } = value
-    return await axios.get(baseUrl + value.foreign.controller)
+  const renderProducts = async (value) => {
+    return await axios.get(baseUrl + 'categories')
       .then(response => {
         setLoading(true)
         // if (value.id === 'customerID') {
-        setChildren({
-          ...children,
-          [id]: response.data.data.map((val) => {
+        setProduct({
+          ...product,
+          categories: response.data.data.map((val) => {
             return <option value={val.id}>{val.name}</option>
           })
         })
@@ -163,15 +166,15 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
   )
 }
 
-FormModal.propTypes = {
+FormModalProduct.propTypes = {
   colorButton: PropTypes.string,
   dataList: PropTypes.object
 }
 
-FormModal.defaultProps = {
+FormModalProduct.defaultProps = {
   icon: faPlus,
   colorButton: "primary",
   dataList: {}
 }
 
-export default FormModal
+export default FormModalProduct
