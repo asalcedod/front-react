@@ -32,7 +32,7 @@ export const UserModel = [
 
     },
     {
-        id: 'path',
+        id: 'imageUrl',
         name: 'Image Profile',
         type: 'file',
         form: true,

@@ -54,7 +54,7 @@ const User = (props) => {
         name: user.name,
         email: user.email,
         password: changePass ? user.password : md5("123456789"),
-        path: user.path,
+        imageUrl: user.imageUrl,
         rol: user.rol,
         status: user.status,
       })
@@ -185,13 +185,13 @@ const User = (props) => {
         </div>
         <div className="row">
           <div className="col-sm-12">
-            <label for="path">Profile Picture:</label>
+            <label for="imageUrl">Profile Picture:</label>
             <input
               type="file"
               className="form-control"
-              name="path"
+              name="imageUrl"
               onChange={handleChange}
-              id="path"
+              id="imageUrl"
             />
           </div>
         </div>
