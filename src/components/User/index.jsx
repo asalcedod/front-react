@@ -47,30 +47,81 @@ const User = (props) => {
   };
 
   const createUser = async () => {
+    const newUser = {
+      identification: user.identification,
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      password: changePass ? user.password : md5("123456789"),
+      imageUrl: user.imageUrl,
+      rol: user.rol,
+      status: user.status,
+    };
+    const f = new FormData();
+    UserModel.forEach((item) => {
+      if (item.foreign) {
+        f.append(item.id, user[item.id]._id);
+      } else {
+        if (item.id === "password") {
+          f.append(item.id, changePass ? user[item.id] : md5("123456789"));
+        } else {
+          f.append(item.id, user[item.id]);
+        }
+      }
+    });
+    /*f.append('identification', user.identification,)
+    f.append('username', user.username)
+    f.append('name', user.name)
+    f.append('email', user.email)
+    f.append('password', changePass ? user.password : md5("123456789"))
+    f.append('imageUrl', user.imageUrl)
+    f.append('rol', user.rol._id)
+    f.append('status', user.status)*/
     await axios
-      .post(baseUrl + "user", {
-        identification: user.identification,
-        username: user.username,
-        name: user.name,
-        email: user.email,
-        password: changePass ? user.password : md5("123456789"),
-        imageUrl: user.imageUrl,
-        rol: user.rol,
-        status: user.status,
+      .post(baseUrl + "user", f, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((response) => {
         peticionGet();
         getUsers();
       })
       .catch((error) => {
-        debugger;
         console.log(error);
       });
   };
 
   const updateUser = async () => {
+    const f = new FormData();
+    /*for(const key in user) {
+      f.append(key, user[key],)
+    }*/
+    UserModel.forEach((item) => {
+      if (item.foreign) {
+        f.append(item.id, user[item.id]._id);
+      } else {
+        if (item.id === "password") {
+          f.append(item.id, changePass ? user[item.id] : md5("123456789"));
+        } else {
+          f.append(item.id, user[item.id]);
+        }
+      }
+    });
+    /*f.append('identification', user.identification,)
+    f.append('username', user.username)
+    f.append('name', user.name)
+    f.append('email', user.email)
+    f.append('password', changePass ? user.password : md5("123456789"))
+    f.append('imageUrl', user.imageUrl)
+    f.append('rol', user.rol._id)
+    f.append('status', user.status)*/
     await axios
-      .put(baseUrl + "user/" + user._id, user)
+      .put(baseUrl + "user/" + user._id, f, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         cookies.set("form", user, { path: "/" });
         setUser(user);
@@ -105,6 +156,7 @@ const User = (props) => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    console.log(e.target);
     setUser({
       ...user,
       [id]: value,
@@ -114,6 +166,13 @@ const User = (props) => {
       setUser({
         ...user,
         [id]: md5(value),
+      });
+    }
+    if (id === "imageUrl") {
+      const fileInput = e.target.files[0];
+      setUser({
+        ...user,
+        [id]: fileInput,
       });
     }
   };
@@ -276,8 +335,8 @@ const User = (props) => {
                 baseUrl={baseUrl + "user"}
               />
             ) : (
-                <ProgressBar color="black" colorBar="grey"></ProgressBar>
-              )}
+              <ProgressBar color="black" colorBar="grey"></ProgressBar>
+            )}
           </Container>
         </div>
       ) : null}
