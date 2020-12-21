@@ -41,7 +41,7 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
             console.log(error)
           })
       case "put":
-        return await axios.put(controller + "/" + form.id, form)
+        return await axios.put(controller + "/" + form._id, form)
           .then(() => {
             setLoading(true)
             setShow(!show)
@@ -61,21 +61,10 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
     })
   }
 
-  const renderInputs = (inputs) => {
-    const renderInput = (value) => {
-      return (
-        <FormGroup key={`${value.id}-${value.name}`}>
-          <Label for={value.id}>{value.name}</Label>
-          {value.type !== 'select' ? 
-          <Input
-            key={value.id}
-            onChange={handleChange}
-            type={value.type}
-            name={value.name}
-            id={value.id}
-            value={form[value.id] ? form[value.id] : ''}
-          /> 
-          :
+  const typeInputs = (value) => {
+    switch (value.type) {
+      case 'select':
+        return (
           <Input
             onChange={handleChange}
             defaultValue={form[value.id] ? form[value.id] : "DEFAULT"}
@@ -84,10 +73,43 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
             name={value.name}
             id={value.id}
           >
-              <option value="DEFAULT" disabled>{`Choose a option...`}</option>
-              {value.id === 'status' ?  renderStatus() : null}
-              {value.id === 'rol' ?  rol[value.id] : null}
-            </Input>}
+            <option value="DEFAULT" disabled>{`Choose a option...`}</option>
+            {value.id === 'status' ? renderStatus() : null}
+            {value.id === 'rol' ? rol[value.id] : null}
+          </Input>
+        )
+      case 'file':
+        return (
+          <div>
+            <Input
+              key={value.id}
+              onChange={handleChange}
+              type={value.type}
+              name={value.name}
+              id={value.id}
+              value={''}
+            />
+            {form[value.id] ? <img src={form[value.id]} width="100%" height="100%"/> : null}
+          </div>)
+
+      default:
+        return (<Input
+          key={value.id}
+          onChange={handleChange}
+          type={value.type}
+          name={value.name}
+          id={value.id}
+          value={form[value.id] ? form[value.id] : ''}
+        />)
+    }
+  }
+
+  const renderInputs = (inputs) => {
+    const renderInput = (value) => {
+      return (
+        <FormGroup key={`${value.id}-${value.name}`}>
+          <Label for={value.id}>{value.name}</Label>
+          {typeInputs(value)}
         </FormGroup>
       )
     }
@@ -111,7 +133,7 @@ const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType
         // if (value.id === 'customerID') {
         setRol({
           ...rol,
-          rolID: response.data.data.map((val) => {
+          rol: response.data.data.map((val) => {
             return <option value={val.id}>{val.name}</option>
           })
         })

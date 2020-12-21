@@ -41,7 +41,6 @@ const CRUD = ({ title, data, baseUrl }) => {
                     inputs={headerText}
                     dataList={data}
                   />
-                  {console.log(data)}
                   <Button
                     color="danger"
                     size="sm"

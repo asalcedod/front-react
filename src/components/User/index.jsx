@@ -233,6 +233,7 @@ const User = (props) => {
               onChange={handleChange}
               id="imageUrl"
             />
+            {user.imageUrl ? <img src={user.imageUrl} width="100%" height="70%"/> : null}
           </div>
         </div>
         <div className="row">
