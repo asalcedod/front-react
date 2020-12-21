@@ -14,6 +14,7 @@ import Cookies from "universal-cookie";
 
 const NavMenu = () => {
   const cookies = new Cookies();
+  const usr = cookies.get("form");
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => {
     setCollapsed(!collapsed);
@@ -66,6 +67,9 @@ const NavMenu = () => {
                 >
                   Logout
                 </NavLink>
+              </NavItem>
+              <NavItem>
+                <img className="profilePicture" src={usr.imageUrl} alt="Avatar" width="50px" height="50px"/>
               </NavItem>
             </ul>
           </Collapse>

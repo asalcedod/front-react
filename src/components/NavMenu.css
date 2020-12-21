@@ -9,6 +9,10 @@ a.text-light:hover, a.text-light:focus {
   font-weight: normal !important;
 }
 
+.profilePicture{
+  border-radius: 50%;
+}
+
 html {
   font-size: 14px;;
 }
