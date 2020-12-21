@@ -61,19 +61,11 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
     })
   }
 
-  const renderInputs = (inputs) => {
-    const renderInput = (value) => {
-      return (
-        <FormGroup key={`${value.id}-${value.name}`}>
-          <Label for={value.id}>{value.name}</Label>
-          {value.type !== 'select' ? <Input
-            key={value.id}
-            onChange={handleChange}
-            type={value.type}
-            name={value.name}
-            id={value.id}
-            value={form[value.id] ? form[value.id] : ''}
-          /> : <Input
+  const typeInputs = (value) => {
+    switch (value.type) {
+      case 'select':
+        return (
+          <Input
             onChange={handleChange}
             defaultValue={form[value.id] ? form[value.id] : "DEFAULT"}
             key={value.id}
@@ -81,9 +73,42 @@ const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, in
             name={value.name}
             id={value.id}
           >
-              <option value="DEFAULT" disabled>{`Choose a option...`}</option>
-              {value.id !== 'status' ? children[value.id] : renderStatus()}
-            </Input>}
+            <option value="DEFAULT" disabled>{`Choose a option...`}</option>
+            {value.id !== 'status' ? children[value.id] : renderStatus()}
+          </Input>
+        )
+      case 'file':
+        return (
+          <div>
+            <Input
+              key={value.id}
+              onChange={handleChange}
+              type={value.type}
+              name={value.name}
+              id={value.id}
+              value={''}
+            />
+            {form[value.id] ? <img src={form[value.id]} width="100%" height="100%" /> : null}
+          </div>)
+
+      default:
+        return (<Input
+          key={value.id}
+          onChange={handleChange}
+          type={value.type}
+          name={value.name}
+          id={value.id}
+          value={form[value.id] ? form[value.id] : ''}
+        />)
+    }
+  }
+
+  const renderInputs = (inputs) => {
+    const renderInput = (value) => {
+      return (
+        <FormGroup key={`${value.id}-${value.name}`}>
+          <Label for={value.id}>{value.name}</Label>
+          {typeInputs(value)}
         </FormGroup>
       )
     }

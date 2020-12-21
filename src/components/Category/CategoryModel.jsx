@@ -1,4 +1,4 @@
-export const ProductModel = [{
+export const CategoryModel = [{
     id: 'name',
     name: 'Name',
     type: 'text',
@@ -11,13 +11,6 @@ export const ProductModel = [{
     type: 'text',
     form: true,
     grid: true
-},
-{
-    id: 'price',
-    name: 'Price',
-    type: 'text',
-    form: true,
-    grid: true
 
 },
 {
@@ -27,25 +20,6 @@ export const ProductModel = [{
     form: true,
     grid: true
 
-},
-{
-    id: 'path',
-    name: 'Image',
-    type: 'file',
-    form: true,
-    grid: false
-
-},
-{
-    id: 'categories',
-    name: 'Categories',
-    type: 'select',
-    foreign: {
-        controller: 'category',
-        key: '_id'
-    },
-    form: true,
-    grid: false
 },
 {
     id: 'status',
@@ -61,8 +35,7 @@ export const ProductModel = [{
     }],
     form: true,
     grid: true
-},
-{
+}, {
     id: 'actions',
     name: 'Actions',
     type: 'text',
