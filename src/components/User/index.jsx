@@ -47,16 +47,6 @@ const User = (props) => {
   };
 
   const createUser = async () => {
-    const newUser = {
-      identification: user.identification,
-      username: user.username,
-      name: user.name,
-      email: user.email,
-      password: changePass ? user.password : md5("123456789"),
-      imageUrl: user.imageUrl,
-      rol: user.rol,
-      status: user.status,
-    };
     const f = new FormData();
     UserModel.forEach((item) => {
       if (item.foreign) {
@@ -78,11 +68,7 @@ const User = (props) => {
     f.append('rol', user.rol._id)
     f.append('status', user.status)*/
     await axios
-      .post(baseUrl + "user", f, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(baseUrl + "user", f)
       .then((response) => {
         peticionGet();
         getUsers();
@@ -117,11 +103,7 @@ const User = (props) => {
     f.append('rol', user.rol._id)
     f.append('status', user.status)*/
     await axios
-      .put(baseUrl + "user/" + user._id, f, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(baseUrl + "user/" + user._id, f)
       .then((response) => {
         cookies.set("form", user, { path: "/" });
         setUser(user);
@@ -156,7 +138,6 @@ const User = (props) => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    console.log(e.target);
     setUser({
       ...user,
       [id]: value,
