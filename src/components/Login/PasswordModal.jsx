@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { baseUrl } from './../constants/url'
+import env from "react-dotenv";
 import axios from 'axios'
 import './login.css';
 import {
@@ -18,6 +18,18 @@ import emailjs from 'emailjs-com'
 import 'bootstrap/dist/css/bootstrap.css'
 
 const PasswordModal = ({ userLogin }) => {
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   const frmContact = {id: "", email: "", restorePassword: "" + Math.floor(Math.random() * 100000000) + 1000000};
   const [show, setShow] = useState(false)
   const [user, setUser] = useState(userLogin);

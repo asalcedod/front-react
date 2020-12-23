@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { baseUrl } from './../constants/url'
+import env from "react-dotenv";
 import { CategoryModel } from './CategoryModel'
 import Cookies from 'universal-cookie';
 import Table from '../dinamic/Table'
@@ -15,6 +15,18 @@ import ProgressBar from '../dinamic/ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Category = (props) => {
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   const cookies = new Cookies()
 
   const [data, setData] = useState(null)

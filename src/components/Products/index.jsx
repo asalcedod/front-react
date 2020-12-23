@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from 'universal-cookie';
-import { baseUrl } from './../constants/url'
+import env from "react-dotenv";
 import { ProductModel } from './ProductModel'
 import NavMenu from '../NavMenu';
 import Table from '../dinamic/Table'
@@ -14,7 +14,19 @@ import {
 import ProgressBar from '../dinamic/ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Customers = (props) => {
+const Products = (props) => {
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   const cookies = new Cookies()
 
   const [data, setData] = useState(null)
@@ -87,4 +99,4 @@ const Customers = (props) => {
   )
 }
 
-export default Customers
+export default Products

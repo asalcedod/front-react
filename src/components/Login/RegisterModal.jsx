@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { baseUrl } from '../constants/url'
+import env from "react-dotenv";
 import LoadingOverlay from 'react-loading-overlay';
 import md5 from "md5";
 import {
@@ -19,6 +19,18 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
 const RegisterModal = ({ }) => {
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   const [show, setShow] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [form, setForm] = useState({});

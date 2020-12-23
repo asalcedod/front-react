@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { baseUrl } from "./../constants/url";
+import env from "react-dotenv";
 import { Button, Form, Input } from "reactstrap";
 import md5 from "md5";
 import CustomInput from "./Input/Index";
@@ -16,6 +16,18 @@ import { confirmAlert } from "react-confirm-alert";
 import "./../../styles/react-confirm-alert.css";
 
 const Login = (props) => {
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   const cookies = new Cookies();
   const [form, setForm] = useState({
     username: "",

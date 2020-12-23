@@ -3,11 +3,22 @@ import 'bootstrap/dist/css/bootstrap.css'
 import NavMenu from './../NavMenu'
 import md5 from 'md5'
 import Cookies from 'universal-cookie'
-import { baseUrl } from '../constants/url'
+import env from "react-dotenv";
 import axios from 'axios'
 
 const Permissions = (props) => {
-  
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   return (
     <div class="Container">   
     <NavMenu /> 

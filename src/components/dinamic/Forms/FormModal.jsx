@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { baseUrl } from './../../constants/url'
+import env from "react-dotenv";
 import { Status } from './../Status'
 import LoadingOverlay from 'react-loading-overlay';
 import {
@@ -20,6 +20,18 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
 const FormModal = ({ modalTitle, colorButton, icon, controller, petitionType, inputs, dataList }) => {
+  let baseUrl = env.URL_LOCAL
+  switch (process.env.NODE_ENV) {
+    case "DEVELOPMENT":
+      baseUrl = env.URL_DEV
+      break;
+    case "PRODUCTION":
+      baseUrl = env.URL_PRODUCTION
+      break;
+
+    default:
+      break;
+  }
   const [show, setShow] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [form, setForm] = useState(dataList);
