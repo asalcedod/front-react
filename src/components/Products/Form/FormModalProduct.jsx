@@ -98,7 +98,7 @@ const FormModalProduct = ({ modalTitle, colorButton, icon, controller, petitionT
           >
               <option value="DEFAULT" disabled>{`Choose a option...`}</option>
               {value.id === 'status' ?  renderStatus() : null}
-              {value.id === 'rol' ?  product[value.id] : null}
+              {value.id === 'categories' ?  product[value.id] : null}
             </Input>}
         </FormGroup>
       )
