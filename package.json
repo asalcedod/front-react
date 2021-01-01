@@ -58,6 +58,11 @@
     ]
   },
   "react-dotenv": {
-    "whitelist": ["URL_LOCAL", "PORT" , "URL_DEV", "URL_PRODUCTION"]
+    "whitelist": [
+      "URL_LOCAL",
+      "PORT",
+      "URL_DEV",
+      "URL_PRODUCTION"
+    ]
   }
 }
