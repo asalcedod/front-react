@@ -20,13 +20,13 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
 const FormModalUser = ({ modalTitle, colorButton, icon, controller, petitionType, inputs, dataList }) => {
-  let baseUrl = env.URL_LOCAL
+  let baseUrl = env.API_LOCAL
   switch (process.env.NODE_ENV) {
     case "DEVELOPMENT":
-      baseUrl = env.URL_DEV
+      baseUrl = env.API_DEV
       break;
     case "PRODUCTION":
-      baseUrl = env.URL_PRODUCTION
+      baseUrl = env.API_PRODUCTION
       break;
 
     default:

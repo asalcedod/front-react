@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import env from "react-dotenv";
 import { SubmitModel } from './SubmitModel'
 import Cookies from 'universal-cookie';
 import Table from '../dinamic/Table'
@@ -13,20 +12,10 @@ import {
 } from 'reactstrap'
 import ProgressBar from '../dinamic/ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { enviroment } from './../../util/enviroment'
 
 const Submit = (props) => {
-  let baseUrl = env.URL_LOCAL
-  switch (process.env.NODE_ENV) {
-    case "DEVELOPMENT":
-      baseUrl = env.URL_DEV
-      break;
-    case "PRODUCTION":
-      baseUrl = env.URL_PRODUCTION
-      break;
-
-    default:
-      break;
-  }
+  const baseUrl = enviroment()
   const cookies = new Cookies()
 
   const [data, setData] = useState(null)

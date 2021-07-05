@@ -7,25 +7,14 @@ import md5 from "md5";
 import { faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "universal-cookie";
-import env from "react-dotenv";
+import { enviroment } from './../../util/enviroment'
 import ProgressBar from "../dinamic/ProgressBar";
 import axios from "axios";
 import "./user.css";
 import { Container } from "reactstrap";
 
 const User = (props) => {
-  let baseUrl = env.URL_LOCAL
-  switch (process.env.NODE_ENV) {
-    case "DEVELOPMENT":
-      baseUrl = env.URL_DEV
-      break;
-    case "PRODUCTION":
-      baseUrl = env.URL_PRODUCTION
-      break;
-
-    default:
-      break;
-  }
+  const baseUrl = enviroment()
   const cookies = new Cookies();
   const usr = cookies.get("form");
   const [firstRender, setFirstRender] = useState(true);

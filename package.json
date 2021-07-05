@@ -61,8 +61,12 @@
     "whitelist": [
       "URL_LOCAL",
       "PORT",
+      "NODE_ENV",
       "URL_DEV",
-      "URL_PRODUCTION"
+      "URL_PRODUCTION",
+      "API_LOCAL",
+      "API_DEV",
+      "API_PRODUCTION"
     ]
   }
 }

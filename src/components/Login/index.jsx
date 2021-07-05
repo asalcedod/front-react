@@ -16,13 +16,13 @@ import { confirmAlert } from "react-confirm-alert";
 import "./../../styles/react-confirm-alert.css";
 
 const Login = (props) => {
-  let baseUrl = env.URL_LOCAL
+  let baseUrl = env.API_LOCAL
   switch (process.env.NODE_ENV) {
     case "DEVELOPMENT":
-      baseUrl = env.URL_DEV
+      baseUrl = env.API_DEV
       break;
     case "PRODUCTION":
-      baseUrl = env.URL_PRODUCTION
+      baseUrl = env.API_PRODUCTION
       break;
 
     default:
@@ -40,7 +40,7 @@ const Login = (props) => {
 
   const login = async () => {
     await axios
-      .get(baseUrl + `login/${form.username}/${form.password}`)
+      .put(baseUrl + `login`, form)
       .then((response) => {
         ifMatch(response.data.data);
       })

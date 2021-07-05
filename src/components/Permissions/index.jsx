@@ -7,13 +7,13 @@ import env from "react-dotenv";
 import axios from 'axios'
 
 const Permissions = (props) => {
-  let baseUrl = env.URL_LOCAL
+  let baseUrl = env.API_LOCAL
   switch (process.env.NODE_ENV) {
     case "DEVELOPMENT":
-      baseUrl = env.URL_DEV
+      baseUrl = env.API_DEV
       break;
     case "PRODUCTION":
-      baseUrl = env.URL_PRODUCTION
+      baseUrl = env.API_PRODUCTION
       break;
 
     default:
