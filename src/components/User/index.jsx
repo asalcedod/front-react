@@ -7,18 +7,19 @@ import md5 from "md5";
 import { faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "universal-cookie";
-import { enviroment } from './../../util/enviroment'
+import { enviroment } from "./../../util/enviroment";
 import ProgressBar from "../dinamic/ProgressBar";
 import axios from "axios";
 import "./user.css";
 import { Container } from "reactstrap";
 
 const User = (props) => {
-  const baseUrl = enviroment()
+  const baseUrl = enviroment();
   const cookies = new Cookies();
   const usr = cookies.get("form");
   const [firstRender, setFirstRender] = useState(true);
   const [data, setData] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [user, setUser] = useState(usr);
   const [changePass, setChangePass] = useState(false);
   const [rol, setRol] = useState({});
@@ -41,8 +42,10 @@ const User = (props) => {
       .get(baseUrl + "users")
       .then((response) => {
         setData(response.data.data);
+        setSuccess(true);
       })
       .catch((error) => {
+        setSuccess(false);
         console.log(error);
       });
   };
@@ -234,7 +237,9 @@ const User = (props) => {
               onChange={handleChange}
               id="imageUrl"
             />
-            {user.imageUrl ? <img src={user.imageUrl} width="100%" height="70%"/> : null}
+            {user.imageUrl ? (
+              <img src={user.imageUrl} width="100%" height="70%" />
+            ) : null}
           </div>
         </div>
         <div className="row">
@@ -317,6 +322,8 @@ const User = (props) => {
                 })}
                 baseUrl={baseUrl + "user"}
               />
+            ) : success ? (
+              <p>No data found</p>
             ) : (
               <ProgressBar color="black" colorBar="grey"></ProgressBar>
             )}
