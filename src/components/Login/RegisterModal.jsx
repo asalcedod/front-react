@@ -21,10 +21,10 @@ import PropTypes from 'prop-types'
 const RegisterModal = ({ }) => {
   let baseUrl = env.API_LOCAL
   switch (process.env.NODE_ENV) {
-    case "DEVELOPMENT":
+    case "development":
       baseUrl = env.API_DEV
       break;
-    case "PRODUCTION":
+    case "production":
       baseUrl = env.API_PRODUCTION
       break;
 
