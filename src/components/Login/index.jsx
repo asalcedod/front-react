@@ -115,7 +115,7 @@ const Login = (props) => {
   };
 
   return (
-    <Form onSubmit={() => login()}>
+    <Form>
       <div className="login-container">
         <div className="login-content">
           {/*<Logo />*/}
@@ -157,7 +157,7 @@ const Login = (props) => {
           )}
 
           <div className="submit-button-container">
-            <Input type="submit" className="submit" value="Login" />
+            <Button className="submit" onClick={() => login()} >Login</Button>
           </div>
           <RegisterModal />
           {email.email ? <PasswordModal userLogin={email} /> : null}
