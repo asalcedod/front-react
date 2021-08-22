@@ -2,7 +2,6 @@
   from = "/Categories"
   to = "/Categories"
   status = 301
-  force = true
   
 [[redirects]]
   from = "/Submit"
