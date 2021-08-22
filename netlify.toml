@@ -1,11 +1,11 @@
 [[redirects]]
-  from = "/*"
-  to = "/"
+  from = "/coronavirus"
+  to = "https://www.as-submit.tk"
   status = 301
   force = true
   
 [[redirects]]
   from = "/Submit"
-  to = "/"
+  to = "https://www.as-submit.tk"
   status = 301
   force = true
