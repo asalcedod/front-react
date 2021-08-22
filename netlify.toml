@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/corona"
+  to = "https://www.youtube.com/watch?v=VCMJg6qf5ak"
+  status = 301
+  force = true
