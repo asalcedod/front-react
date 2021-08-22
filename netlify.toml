@@ -3,3 +3,9 @@
   to = "https://www.youtube.com/watch?v=VCMJg6qf5ak"
   status = 301
   force = true
+  
+[[redirects]]
+  from = "/Submit"
+  to = "https://www.youtube.com/watch?v=VCMJg6qf5ak"
+  status = 301
+  force = true
