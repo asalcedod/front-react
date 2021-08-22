@@ -48,7 +48,7 @@ const Products = (props) => {
               modalTitle="New"
               colorButton="success"
               icon={faPlus}
-              controller={baseUrl + "submit"}
+              controller={baseUrl + "product"}
               petitionType="post"
               inputs={title}
             />
@@ -59,7 +59,7 @@ const Products = (props) => {
               modalTitle="Update"
               colorButton="primary"
               icon={faEdit}
-              controller={baseUrl + "submit"}
+              controller={baseUrl + "product"}
               petitionType="put"
               dataList={{}}
             />
