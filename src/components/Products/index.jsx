@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
-import { enviroment } from "./../../util/enviroment";
+import { enviroment } from "../../util/enviroment";
 import { ProductModel } from "./ProductModel";
 import NavMenu from "../NavMenu";
+import { getProducts } from "../../util/product_endpoints";
 import Table from "../dinamic/Table";
-import axios from "axios";
 import FormModal from "./Form/FormModalProduct";
 import { faPlus, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Container, Button } from "reactstrap";
@@ -18,24 +18,21 @@ const Products = (props) => {
   const [data, setData] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const getProducts = async () => {
-    await axios
-      .get(baseUrl + "products")
-      .then((response) => {
-        setData(response.data.data);
-        setSuccess(true);
-      })
-      .catch((error) => {
-        setSuccess(false);
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
     if (!cookies.get("form")) {
       props.history.push("/Submit");
     } else {
-      getProducts();
+      getProducts()
+        .then((response) => {
+          console.log(response.data.data);
+          setData(response.data.data);
+          setSuccess(true);
+        })
+        .catch((error) => {
+          setData([]);
+          setSuccess(false);
+          console.log(error);
+        });
     }
   });
 
@@ -79,22 +76,21 @@ const Products = (props) => {
   };
 
   return (
-    <div className="Container">
-      <NavMenu />
       <Container>
         <h5>Products List</h5>
-        <div>{renderActionButtons(ProductModel, ["create"])}</div>
+        <div className="actionsbutton">{renderActionButtons(ProductModel, ["create"])}</div>
         {data ? (
           <Table
             title={ProductModel}
             data={data}
             baseUrl={baseUrl + "product"}
           />
+        ) : success ? (
+          <p>No data found</p>
         ) : (
-          success ? <p>No data found</p> : <ProgressBar color="black" colorBar="grey"></ProgressBar>
+          <ProgressBar color="black" colorBar="grey"></ProgressBar>
         )}
       </Container>
-    </div>
   );
 };
 

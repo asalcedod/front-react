@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import env from "react-dotenv";
 import axios from 'axios'
-import './login.css';
 import {
   Button,
   Modal,
@@ -15,7 +14,6 @@ import {
 } from 'reactstrap'
 import md5 from 'md5';
 import emailjs from 'emailjs-com'
-import 'bootstrap/dist/css/bootstrap.css'
 
 const PasswordModal = ({ userLogin }) => {
   let baseUrl = process.env.REACT_APP_API_LOCAL

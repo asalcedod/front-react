@@ -1,4 +1,3 @@
-import env from "react-dotenv";
 
 export const enviroment = () => {
   let baseUrl = process.env.REACT_APP_API_LOCAL;

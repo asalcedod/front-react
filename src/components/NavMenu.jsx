@@ -1,81 +1,68 @@
 import React, { useState } from "react";
+import { FaIcons, AiIcons, BiIcons, CgIcons } from "./../util/icons";
+import Cookies from "universal-cookie";
 import {
   Collapse,
-  Container,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
+  NavbarBrand,
+  Nav,
   NavItem,
   NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText,
+  Button,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import "./NavMenu.css";
-import Cookies from "universal-cookie";
+import noPicture from "./../images/no_user.png"
 
-const NavMenu = () => {
+const NavMenu = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
   const cookies = new Cookies();
   const usr = cookies.get("form");
-  const [collapsed, setCollapsed] = useState(true);
-  const toggleNavbar = () => {
-    setCollapsed(!collapsed);
-  };
 
   const logout = () => {
+    localStorage.clear()
     cookies.remove("form", { path: "/" });
+    props.accessLogout()
   };
 
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
-    <header>
-      <Navbar className="navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
-        <Container>
-          <NavbarBrand tag={Link} className="text-light" to="/">
-            Submit Service
-          </NavbarBrand>
-          <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-          <Collapse
-            className="d-sm-inline-flex flex-sm-row-reverse"
-            isOpen={!collapsed}
-            navbar
-          >
-            <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-light" to="/Submit">
-                  Submit
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-light" to="/Categories">
-                  Category
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-light" to="/Products">
-                  Product
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-light" to="/User">
-                  User
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  tag={Link}
-                  className="text-light"
-                  to="/"
-                  onClick={() => logout()}
-                >
+    <div>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand onClick={props.toggleNavbar}>
+          <Button ><CgIcons.CgMenu /></Button>
+        </NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                <img
+                  className="profilePicture mr-2"
+                  src={usr ? usr.imageUrl : noPicture}
+                  alt="avatar-ang"
+                  width="30px"
+                  height="30px"
+                />
+                {usr ? usr.name : "Sign in session"}
+              </DropdownToggle>
+              <DropdownMenu hidden={usr ? false : true} right>
+                {/* <DropdownItem divider /> */}
+                <DropdownItem onClick={logout}>
+                  <FaIcons.FaSignOutAlt className="mr-2" />
                   Logout
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <img className="profilePicture" src={usr.imageUrl} alt="Avatar" width="50px" height="50px"/>
-              </NavItem>
-            </ul>
-          </Collapse>
-        </Container>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+        </Collapse>
       </Navbar>
-    </header>
+    </div>
   );
 };
 

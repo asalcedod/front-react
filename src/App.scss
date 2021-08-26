@@ -1,3 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+$light: #ffff;
+$gray: #71717e;
+
+.navmenu {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid $gray;
+}
+
+.flex {
+  display: flex;
+}
+
+.actionsbutton {
+  padding: 1rem;
+}
+
+.sidebar {
+  width: 16rem;
+  height: calc(100vh);
+  border-right: 1px solid $gray;
+  transition: 300ms;
+  &.active {
+    width: 1rem;
+    transition: 300ms;
+    .textmenu {
+      display: none;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 1rem 2rem;
+    li {
+      margin-bottom: 1rem;
+      a {
+        text-decoration: none;
+        color: white;
+        &.active {
+          background-color: $gray;
+        }
+      }
+    }
+  }
+}
+
 .login-container{
   display: flex;
   flex-direction: column;
@@ -35,7 +90,7 @@
   padding-top: 10px;
 }
 
-.submit {
+.login {
     width: 90%;
     height: 35px;
     border-radius: 16px;
@@ -96,4 +151,3 @@
   .form-control {
     padding-left: 30px!important;
   }
-

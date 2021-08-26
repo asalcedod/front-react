@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
-import env from "react-dotenv";
-import { Button, Form, Input } from "reactstrap";
+import { Container, Form } from "reactstrap";
 import md5 from "md5";
 import CustomInput from "./Input/Index";
 import PasswordModal from "./PasswordModal";
 import RegisterModal from "./RegisterModal";
-import Logo from "./Logo/Logo";
 import Label from "./Label/Label";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import "bootstrap/dist/css/bootstrap.css";
-import "./login.css";
-import "./Input/Input.css";
 import { confirmAlert } from "react-confirm-alert";
-import "./../../styles/react-confirm-alert.css";
 
 const Login = (props) => {
-  let baseUrl = process.env.REACT_APP_API_LOCAL
+  let baseUrl = process.env.REACT_APP_API_LOCAL;
   switch (process.env.NODE_ENV) {
     case "development":
-      baseUrl = process.env.REACT_APP_API_DEV
+      baseUrl = process.env.REACT_APP_API_DEV;
       break;
     case "production":
-      baseUrl = process.env.REACT_APP_API_PRODUCTION
+      baseUrl = process.env.REACT_APP_API_PRODUCTION;
       break;
 
     default:
@@ -54,7 +48,7 @@ const Login = (props) => {
     if (cookies.get("form")) {
       props.history.push("/Submit");
     }
-  });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,7 +87,7 @@ const Login = (props) => {
     if (param.username === form.username && param.password === form.password) {
       cookies.set("form", param, { path: "/" });
       // setIsLogin(true);
-      props.history.push("/Submit");
+      window.location.reload()
     } else {
       // setIsLogin(false);
       setEmail(param);
@@ -115,55 +109,63 @@ const Login = (props) => {
   };
 
   return (
-    <Form>
-      <div className="login-container">
-        <div className="login-content">
-          {/*<Logo />*/}
-          {hasError && (
-            <lable className="label-alert">
-              Your password or username are incorrect or do not exist.
-            </lable>
-          )}
-          <Label text="Username" />
-          <div>
-            <i className="fa fa-username form-control-feedback"></i>
-            <CustomInput
-              attribute={{
-                id: 'username',
-                name: 'username',
-                type: 'text',
-                placeholder: 'Enter your username'
-            }}
-            handleChange={handleChange}
-            param={usernameError}
-            />
-          </div>
-          <Label text="Password" />
-          <div>
-            <i className="fa fa-lock form-control-feedback"></i>
-            <CustomInput
-              attribute={{
-                id: 'password',
-                name: 'password',
-                type: 'Password',
-                placeholder: 'Enter your password'
-            }}
-            handleChange={handleChange}
-            param={passwordError}
-            />
-          </div>
-          {passwordError && (
-            <label className="label-error">invalid or incorrect password</label>
-          )}
+    <>
+      <Container>
+        <div>
+          <div className="login-container">
+            <div className="login-content">
+              {/*<Logo />*/}
+              {hasError && (
+                <lable className="label-alert">
+                  Your password or username are incorrect or do not exist.
+                </lable>
+              )}
+              <Label text="Username" />
+              <div>
+                <i className="fa fa-username form-control-feedback"></i>
+                <CustomInput
+                  attribute={{
+                    id: "username",
+                    name: "username",
+                    type: "text",
+                    placeholder: "Enter your username",
+                  }}
+                  handleChange={handleChange}
+                  param={usernameError}
+                />
+              </div>
+              <Label text="Password" />
+              <div>
+                <i className="fa fa-lock form-control-feedback"></i>
+                <CustomInput
+                  attribute={{
+                    id: "password",
+                    name: "password",
+                    type: "Password",
+                    placeholder: "Enter your password",
+                  }}
+                  handleChange={handleChange}
+                  param={passwordError}
+                />
+              </div>
+              {passwordError && (
+                <label className="label-error">
+                  invalid or incorrect password
+                </label>
+              )}
 
-          <div className="submit-button-container">
-            <Button className="submit" onClick={() => login()} >Login</Button>
+              <div className="submit-button-container">
+                <button className="login" onClick={() => login()}>
+                  Login
+                </button>
+              </div>
+              <RegisterModal />
+              {email.email ? <PasswordModal userLogin={email} /> : null}
+            </div>
           </div>
-          <RegisterModal />
-          {email.email ? <PasswordModal userLogin={email} /> : null}
         </div>
-      </div>
-    </Form>
+      </Container>
+    </>
   );
 };
 
