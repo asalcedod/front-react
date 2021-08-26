@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { SubmitModel } from "./SubmitModel";
 import Cookies from "universal-cookie";
 import Table from "../dinamic/Table";
-import NavMenu from "../NavMenu";
 import axios from "axios";
 import FormModal from "../dinamic/Forms/FormModal";
 import { faPlus, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -79,18 +78,15 @@ const Submit = (props) => {
   };
 
   return (
-    <div className="Container">
-      <NavMenu />
       <Container>
         <h5>Submit List</h5>
-        <div>{renderActionButtons(SubmitModel, ["create"])}</div>
+        <div className="actionsbutton">{renderActionButtons(SubmitModel, ["create"])}</div>
         {data ? (
           <Table title={SubmitModel} data={data} baseUrl={baseUrl + "submit"} />
         ) : (
           success ? <p>No data found</p> : <ProgressBar color="black" colorBar="grey"></ProgressBar>
         )}
       </Container>
-    </div>
   );
 };
 

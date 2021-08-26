@@ -44,7 +44,7 @@ export const ProductModel = [{
         controller: 'category',
         key: '_id'
     },
-    form: true,
+    form: false,
     grid: false
 },
 {

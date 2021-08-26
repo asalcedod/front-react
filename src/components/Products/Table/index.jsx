@@ -6,7 +6,7 @@ import FormModal from "./../Forms/FormModal";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-//import "./table.css";
+import "./table.css";
 
 const CRUD = ({ title, data, baseUrl }) => {
   const peticionDelete = async (data) => {
@@ -20,7 +20,7 @@ const CRUD = ({ title, data, baseUrl }) => {
 
   const renderTableTittle = (header) => {
     const renderTittle = (data) =>
-      data.grid ? <th className="text-dark" key={data.id}>{data.name}</th> : null;
+      data.grid ? <th key={data.id}>{data.name}</th> : null;
     return header.map(renderTittle);
   };
 
@@ -54,18 +54,18 @@ const CRUD = ({ title, data, baseUrl }) => {
           }
           if (key.id === "status") {
             if (data[key.id] == 1) {
-              return <td className="text-dark" key={`${data[key.id]}-${key.id}`}>Active</td>;
+              return <td key={`${data[key.id]}-${key.id}`}>Active</td>;
             }
             if (data[key.id] == 0) {
-              return <td className="text-dark" key={`${data[key.id]}-${key.id}`}>Inactive</td>;
+              return <td key={`${data[key.id]}-${key.id}`}>Inactive</td>;
             } else {
-              return <td className="text-dark" key={`${data[key.id]}-${key.id}`}>N/A</td>;
+              return <td key={`${data[key.id]}-${key.id}`}>N/A</td>;
             }
           } else {
             if (key.type === "password") {
-              return <td className="text-dark" key={`${data[key.id]}-${key.id}`}>*******</td>;
+              return <td key={`${data[key.id]}-${key.id}`}>*******</td>;
             } else {
-              return <td className="text-dark" key={`${data[key.id]}-${key.id}`}>{data[key.id]}</td>;
+              return <td key={`${data[key.id]}-${key.id}`}>{data[key.id]}</td>;
             }
           }
         }
@@ -77,8 +77,8 @@ const CRUD = ({ title, data, baseUrl }) => {
 
   return (
     <div>
-      <Table className="text-dark" bordered>
-        <thead className="text-dark">
+      <Table dark bordered>
+        <thead>
           <tr>{renderTableTittle(title)}</tr>
         </thead>
         <tbody>{renderData(title, data)}</tbody>

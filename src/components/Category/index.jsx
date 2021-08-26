@@ -90,11 +90,9 @@ const Category = (props) => {
   };
 
   return (
-    <div className="Container">
-      <NavMenu />
       <Container>
         <h5>Category List</h5>
-        <div>{renderActionButtons(CategoryModel, ["create"])}</div>
+        <div className="actionsbutton">{renderActionButtons(CategoryModel, ["create"])}</div>
         {data ? (
           <Table
             title={CategoryModel}
@@ -105,7 +103,6 @@ const Category = (props) => {
           success ? <p>No data found</p> : <ProgressBar color="black" colorBar="grey"></ProgressBar>
         )}
       </Container>
-    </div>
   );
 };
 

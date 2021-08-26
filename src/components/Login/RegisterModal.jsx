@@ -87,9 +87,9 @@ const RegisterModal = ({ }) => {
 
   return (
     <div className="submit-button-container">
-      <Button onClick={toggle} className='register'>
+      <button onClick={toggle} className='register'>
         Register
-      </Button>
+      </button>
 
       <LoadingOverlay
         active={isLoading}
