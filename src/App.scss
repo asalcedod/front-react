@@ -33,7 +33,7 @@ $gray: #71717e;
   &.active {
     width: 1rem;
     transition: 300ms;
-    .textmenu {
+    li {
       display: none;
     }
   }
