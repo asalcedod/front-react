@@ -6,7 +6,6 @@ import FormModalUser from './../Form/FormModalUser'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 
-import './table.css'
 
 const CRUD = ({ title, data, baseUrl }) => {
 
@@ -67,7 +66,7 @@ const CRUD = ({ title, data, baseUrl }) => {
 
   return (
     <div>
-      <Table dark bordered>
+      <Table bordered>
         <thead>
           <tr>{renderTableTittle(title)}</tr>
         </thead>

@@ -176,7 +176,6 @@ const User = (props) => {
   });
   return (
     <div className="Container">
-      <NavMenu />
       <div id="formUser">
         <div className="row pt-5">
           <div className="col-sm-12">

@@ -16,7 +16,7 @@ import {
   NavbarText,
   Button,
 } from "reactstrap";
-import noPicture from "./../images/no_user.png"
+import noPicture from "./../images/no_user.png";
 
 const NavMenu = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +24,9 @@ const NavMenu = (props) => {
   const usr = cookies.get("form");
 
   const logout = () => {
-    localStorage.clear()
+    localStorage.clear();
     cookies.remove("form", { path: "/" });
-    props.accessLogout()
+    props.accessLogout();
   };
 
   const toggle = () => setIsOpen(!isOpen);
@@ -35,7 +35,9 @@ const NavMenu = (props) => {
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand onClick={props.toggleNavbar}>
-          <Button ><CgIcons.CgMenu /></Button>
+          <Button>
+            <CgIcons.CgMenu />
+          </Button>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -52,7 +54,11 @@ const NavMenu = (props) => {
                 {usr ? usr.name : "Sign in session"}
               </DropdownToggle>
               <DropdownMenu hidden={usr ? false : true} right>
-                {/* <DropdownItem divider /> */}
+                <DropdownItem href="User">
+                  <FaIcons.FaUser className="mr-2" />
+                  Account
+                </DropdownItem>
+                <DropdownItem divider />
                 <DropdownItem onClick={logout}>
                   <FaIcons.FaSignOutAlt className="mr-2" />
                   Logout
