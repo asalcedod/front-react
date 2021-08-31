@@ -10,7 +10,7 @@ const Input = ({ attribute, handleChange, param }) => {
             placeholder={attribute.placeholder}
             type={attribute.type}
             onChange={ handleChange }
-            className={ param ? 'input-error' : 'regular-style' }
+            className={ param ? 'input-error' : 'regular-style bg-gray' }
             />
         </div>
     )

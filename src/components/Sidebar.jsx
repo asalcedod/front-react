@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaIcons, AiIcons } from "./../util/icons"
+import { FaIcons, AiIcons } from "./../util/icons";
 import { NavLink, Link } from "react-router-dom";
 import "./NavMenu.css";
 import Cookies from "universal-cookie";
@@ -22,10 +22,8 @@ const Sidebar = (props) => {
               activeClassName="active"
               to="/Submit"
             >
-              <span className="textmenu">
-                <FaIcons.FaUsers className="mr-2" />
-                Submit
-              </span>
+              <FaIcons.FaUsers className="mr-2" />
+              <span className="textmenu">Submit</span>
             </NavLink>
           </li>
           <li>
@@ -35,10 +33,8 @@ const Sidebar = (props) => {
               activeClassName="active"
               to="/Categories"
             >
-              <span className="textmenu">
-                <FaIcons.FaLayerGroup className="mr-2" />
-                Categories
-              </span>
+              <FaIcons.FaLayerGroup className="mr-2" />
+              <span className="textmenu">Categories</span>
             </NavLink>
           </li>
           <li>
@@ -48,26 +44,22 @@ const Sidebar = (props) => {
               activeClassName="active"
               to="/Products"
             >
-              <span className="textmenu">
-                <FaIcons.FaBoxes className="mr-2" />
-                Products
-              </span>
+              <FaIcons.FaBoxes className="mr-2" />
+              <span className="textmenu">Products</span>
             </NavLink>
           </li>
         </ul>
       ) : (
         <ul>
           <li>
-          <NavLink
+            <NavLink
               className="rounded py-2 w-100 d-inline-block px-2"
               exact
               activeClassName="active"
               to="/"
             >
-              <span className="textmenu">
-                <AiIcons.AiOutlineLogin className="mr-2" />
-                Login
-              </span>
+              <AiIcons.AiOutlineLogin className="mr-2" />
+              <span className="textmenu">Login</span>
             </NavLink>
           </li>
         </ul>

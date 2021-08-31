@@ -1,7 +1,7 @@
 window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "APPDATA": "C:\\Users\\Antonio\\AppData\\Roaming",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_21564_ZKWCAAIZISFKZPXD",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_22212_DUTQCQBJTGNXUMYO",
   "COLORTERM": "truecolor",
   "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
   "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
@@ -194,7 +194,7 @@ window.env = {
   "npm_package_devDependencies_nodemon": "^2.0.6",
   "npm_package_eslintConfig_extends_0": "react-app",
   "npm_package_eslintConfig_extends_1": "react-app/jest",
-  "npm_package_gitHead": "7bea33150f8c14781907a142cab9f362deb3b9c0",
+  "npm_package_gitHead": "c0ab4520f185f610b4116e26ca4d6a07cfbfd098",
   "npm_package_name": "client_submit",
   "npm_package_private": "true",
   "npm_package_readmeFilename": "README.md",
